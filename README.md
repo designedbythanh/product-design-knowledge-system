@@ -1,112 +1,64 @@
 # Product & Design Knowledge System
 
-A layered documentation architecture for product designers and teams who want their design knowledge to be usable by both humans and AI agents (Claude, Cursor, Figma Make, etc.).
+Templates for the context AI tools need to give useful product design feedback: what your product is, who uses it, the rules a design is judged against, and what you intend for each feature. Written so a person can read them and an AI skill can follow them without guessing.
 
-This framework comes from building a real design knowledge system (15+ sections, 8+ decision logs, and 4 in-depth modules). Adapted into a template you can make your own, whatever product you're working on.
+by [Thanh Nguyen](https://www.linkedin.com/in/thanh2-nguyen/) · Product Designer, AI-native workflows · [Substack](https://designedbythanh.substack.com)
 
-**Who it's for:** product designers, design leads, and design-forward PMs working on B2B SaaS products.
+Implements context contract 1.0 of the [AI Skills Library for Product & Design Teams](https://github.com/designedbythanh/ai-skills-library-product-design/blob/main/CONTEXT-CONTRACT.md).
 
-**What you get:** a template structure — not content. You fill in your product's truth. The system tells you *where* and *how*.
+## The one rule
 
-by [Thanh Nguyen](https://www.linkedin.com/in/thanh2-nguyen/) · Product Designer, AI-native workflows · [Notion version](https://www.notion.com/@thanh-nguyen) · [Substack](https://designedbythanh.substack.com)
+**Write down what only you know. Point to what already has a home.**
 
-## Why this exists
-
-Most product design documentation fails in one of two ways:
-
-1. **Too abstract**: values and principles that don't tell anyone what to actually do
-2. **Too scattered**: decisions buried in Slack threads, Figma comments, and individual memory
-
-This framework solves both. It gives **every decision a home**, a format, and an instruction that an AI agent can follow without interpretation.
-
-The output is a **living knowledge system** — not a one-time doc — that gets more useful the longer you maintain it.
+Your intent for a feature, the decisions you made and why, the words your product uses, the rules you'd fail a design on: nobody can infer these, so they go here. Your design system, your PRD, your tickets already live in Figma, Notion or a tracker. Copying them here makes a second version that goes stale, and an AI tool reading the stale one gives confident, wrong feedback. Link them instead.
 
 ## Get started
 
-Click **Use this template** at the top of this page to copy the structure into your own repo, then point your AI tool at these files.
+1. **Run `product-context`** from the [skills library](https://github.com/designedbythanh/ai-skills-library-product-design) in your project. It asks what's missing, finds the docs you already have, asks you to confirm each one, and writes `PRODUCT.md` and a first brief using these templates. Without the skills, copy the templates and fill them by hand.
+2. **Look at the [Northbeam example](examples/northbeam/)** to see what "filled in" looks like.
+3. **Fill the minimum**: `PRODUCT.md` (product, roles, vocabulary), one brief, and the review checklist in `guidelines.md`. Everything else can wait until a skill asks for it.
 
-```
-guidelines.md                        Layer 1 — Master Guidelines
-decision-log.md                      Layer 2 — Decision Log
-modules/                             Layer 3 — Deep-Dive Modules
-  _TEMPLATE.md
-agents/                              Layer 4 — Agent Interface
-  agent-roles.md
-  routing-logic.md
-  output-schema.example.json
-evidence/                            Layer 5 — Evidence
-  figma-component-inventory.md
-  annotated-screens.md
-```
+Write `Not provided` for what you don't know yet, and `⚠️ Not validated` for what you're assuming. A blank tells a skill to ask; a guess sends it the wrong way.
 
-## The Five-Layer Architecture
+## What's here
 
-| Layer | What it holds | Role | Principle |
+| File | Role | Holds | Read by |
 |---|---|---|---|
-| **1 — [Master Guidelines](guidelines.md)** | Product · Design system · Patterns · Microcopy | Single source of truth. Every other layer references this. If something is not in guidelines.md, it doesn't exist as a system rule. | Markdown. Machine-readable. 15–20 sections. ~1500–2500 lines for a mature product. |
-| **2 — [Decision Log](decision-log.md)** | Judgment calls · Rejected alternatives · Rules | Append-only journal of non-obvious judgment calls. The "why" behind the decisions that guidelines compress into rules. | This file is never edited — only appended. Old entries are settled; new entries can supersede them but never replace them. |
-| **3 — [Deep-Dive Modules](modules/)** | Feature docs · Data models · Composition specs | When a feature or domain is too complex for a guidelines section, it gets its own module. These are merged back into guidelines when stable. | A module exists as a standalone file only while it's being actively written. Once stable, it merges into the relevant guidelines section and the standalone file is deprecated. |
-| **4 — [Agent Interface](agents/)** | Agent roles · Routing logic · Output schemas | Makes your knowledge system usable by AI agents without extra explanation. Tells agents what they are, what they see, what they produce. | **Build this after** your Layer 1 and Layer 2 are stable. Building Layer 4 too early creates specs for a system that doesn't exist yet. |
-| **5 — [Evidence](evidence/)** | Figma inventory · Annotated screens · Screenshots | The grounding layer. What agents consult when they need to recognize a component or verify a pattern is real. | **Build this incrementally.** Don't try to document all screens at once — start with the 5 most frequently designed screens. |
+| [`PRODUCT.md`](PRODUCT.md) | `product` | What the product is and isn't, users, roles, vocabulary, and **Sources**, the index of where everything else lives | every skill |
+| [`templates/brief.md`](templates/brief.md) → `briefs/<feature>.md` | `feature` | Your intent for one feature: goal, stage, decided, rejected, open, worries, and a Log the skills add to | every skill |
+| [`guidelines.md`](guidelines.md) | `guidelines` | Values, patterns, states, AI features, microcopy, review checklist. Each section says which skills use it | critique, edge cases, acceptance criteria, … |
+| [`decision-log.md`](decision-log.md) | `decisions` | Decisions that apply across features, with why and what was rejected | every skill (as decided) |
+| [`evidence/`](evidence/) | `evidence` | Annotated screens, component inventory, or just links to them | critique, persona pretest |
 
-**Reading order for agents**: Layer 1 → Layer 2 → Layer 3 → Layer 4 → Layer 5
-**Writing order for humans**: Start at Layer 1, add Layer 2 entries as you work, pull modules into Layer 3 when things get long.
+## Already have your own docs?
 
-## Starter checklist
+Keep them where they are. A `DESIGN.md`, an ADR folder, a design note per feature, a tokens file: list each one in `PRODUCT.md` › Sources, with the role it plays. Skills read your files through that index and only fall back to these templates for roles you haven't listed. `product-context` builds the index for you and asks before adding anything.
 
-**Layer 1 — Guidelines**
-- [ ] §1 Product definition written
-- [ ] §2 Explicit scope boundaries written
-- [ ] §3 Product values with concrete examples
-- [ ] §4 Design values as testable checklists
-- [ ] §5 Design system: color + typography + spacing + key components
-- [ ] §6 User context: user types + usage moments
-- [ ] §7 Core UX patterns: empty, error, loading, drill-down
-- [ ] §9 Microcopy: tone rules + golden examples table
-- [ ] §12 Design review checklist (at least 15 items)
+## How the skills use it
 
-**Layer 2 — Decision Log**
-- [ ] File created with header + entry template
-- [ ] At least 5 real entries logged
-- [ ] Entry index table maintained
-- [ ] Each entry has an agent instruction
+- They read `PRODUCT.md` first, then only the sources and `guidelines.md` sections the task needs.
+- They start their answer with `Context used:`, so you see which files they relied on.
+- When two sources disagree, the more specific one wins (what you say now, then the brief, then decisions, then guidelines, then product), and the skill tells you about the disagreement instead of picking silently.
+- They write only to a brief's Log. Product-level files change only when you change them.
 
-**Layer 3 — Deep-Dive Modules**
-- [ ] Identified which features need a module
-- [ ] At least 1 module written for your most complex feature
-- [ ] Module status marked (Draft / Stable / Merged)
+The full rules are in the [context contract](https://github.com/designedbythanh/ai-skills-library-product-design/blob/main/CONTEXT-CONTRACT.md).
 
-**Layer 4 — Agent Interface**
-- [ ] Agent roles defined (even if just 2–3 agents)
-- [ ] Routing logic drafted
-- [ ] At least 1 output schema defined
+## Keeping it alive
 
-**Layer 5 — Evidence**
-- [ ] 3–5 key screens annotated
-- [ ] Figma component inventory started (even if partial)
+- **Append, don't edit, decisions.** A changed decision is a new entry that supersedes the old one.
+- **Promote, don't duplicate.** A feature decision that turns out to apply elsewhere moves to `decision-log.md`; a feature rule that applies elsewhere moves to `guidelines.md`. The brief keeps a pointer.
+- **One primary source per role.** Mark it `primary` in Sources. When files disagree, the primary one wins.
+- **Re-verify what moved.** When a source changes, update its Verified date once you've checked it still holds.
+- **5 minutes beats perfect.** A rough entry today is worth more than a polished one never written.
 
-## What to build first
+## Upgrading from v1
 
-If you're starting from zero:
-
-- **Week 1**: Write §1, §2, §3, §4 of guidelines.md. These are the foundation. Everything else depends on them being clear.
-- **Week 2**: Write §5 (design system) and §12 (review checklist). Now you have something an agent can use immediately.
-- **Week 3 onward**: Write §7 (patterns), §9 (microcopy), and start logging decision-log entries as you do real work.
-- **When stable**: Write Layer 4 (agent interface) to make the whole system orchestratable.
-
-## Maintenance rules
-
-These rules keep the system alive and useful. Without them, it becomes stale documentation.
-
-- **The append rule** — Decision log entries are **never edited** — only new entries are added. If a decision changes, add a new entry that references and supersedes the old one. Never delete the old entry.
-- **The merge rule** — Deep-dive modules (Layer 3) are merged into guidelines.md (Layer 1) when stable. The standalone file is marked deprecated. The canonical version lives in one place.
-- **The single source rule** — One file is primary. Everything else is supporting. When they conflict, the primary file wins. Make the primary file explicit in your system header.
-- **The warning rule** — Unvalidated assumptions are marked `⚠️ Not validated — written from inferred context`. Agents must not treat assumptions as settled facts.
-- **The 5-minute rule** — Decision log entries don't need to be polished. A rough entry written in 5 minutes is 10× more valuable than a perfect entry never written. Quantity beats polish.
-
-## Related
-
-- [AI Skills Library for Product & Design Teams](https://github.com/designedbythanh/ai-skills-library-product-design): 15 structured AI skills, Discovery → Shipping
+v1 had five layers. In v2:
+- **Layer 1, guidelines**: product facts (what it is and isn't, users, domain) moved to `PRODUCT.md`. The design system section is gone: link your design system in Sources. Sections now have fixed headings instead of numbers.
+- **Layer 2, decision log**: unchanged. Feature-only decisions now go in the brief.
+- **Layer 3, modules**: replaced by briefs. A brief has a short core and optional sections (compositions, states, edge cases, flows) for features that need more.
+- **Layer 4, agent interface**: removed. The skills library is the agent layer: each skill defines its inputs and output, and names the skill that usually comes next.
+- **Layer 5, evidence**: unchanged.
 
 ## License
 

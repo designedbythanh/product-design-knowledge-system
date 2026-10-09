@@ -1,13 +1,13 @@
 # DESIGN DECISION LOG
 
-> **What this is**: A personal log of non-obvious design decisions — judgment calls that guidelines can't fully capture.
-> **Who reads it**: Design agents use this as few-shot context when guidelines are ambiguous.
-> **How to use it**: Append a new entry every time you make a decision that isn't obvious from guidelines alone. 5 minutes per entry is enough.
+> **Role: `decisions`.** Decisions that apply across features: judgment calls the guidelines don't fully capture. Skills treat them as decided and won't reopen them.
+> **Not here:** a decision about one feature only. That's one line in the feature's brief, under `## Decided`. When it turns out to apply elsewhere too, it moves here and the brief keeps a pointer: `· see DL-012`. Skills may suggest the move; you make it.
+> **How to use it**: append a new entry when you make a call that isn't obvious from the guidelines. 5 minutes per entry is enough.
 >
-> **Format rule**: Each entry must have at minimum — context, decision, why, agent instruction.
+> **Format rule**: each entry has at least context, decision, why, agent instruction.
 
 <!--
-Layer 2 — Decision Log. Append-only journal of non-obvious judgment calls:
+Append-only journal of non-obvious judgment calls:
 the "why" behind the decisions that guidelines compress into rules.
 
 This file is never edited — only appended. Old entries are settled; new entries
@@ -71,7 +71,7 @@ status: settled | provisional
 → [Add a second rule if needed. Each rule is one line.]
 
 **Related**
-guidelines.md §[section] / DL-[other entry id]
+guidelines.md › [heading] / DL-[other entry id] / briefs/[feature].md
 ```
 
 ---

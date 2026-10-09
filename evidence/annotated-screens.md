@@ -6,7 +6,7 @@
 
 - **Figma frame**: [link or path]
 - **Screenshot**: [embed or path]
-- **Composition**: [which guidelines.md compositions are used]
+- **Patterns used**: [guidelines.md › Patterns entries]
 - **Decision log entries**: [DL-XXX, DL-XXX]
 - **Known issues / TODOs**: [list]
 - **Last reviewed**: [date]
