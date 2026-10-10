@@ -39,7 +39,7 @@ Keep them where they are. A `DESIGN.md`, an ADR folder, a design note per featur
 - They read `PRODUCT.md` first, then only the sources and `guidelines.md` sections the task needs.
 - They start their answer with `Context used:`, so you see which files they relied on.
 - When two sources disagree, the more specific one wins (what you say now, then the brief, then decisions, then guidelines, then product), and the skill tells you about the disagreement instead of picking silently.
-- They write only to a brief's Log. Product-level files change only when you change them.
+- They write only to a brief: a dated entry in its Log, and a line under Open when two sources disagree. Product-level files change only when you change them.
 
 The full rules are in the [context contract](https://github.com/designedbythanh/ai-skills-library-product-design/blob/main/CONTEXT-CONTRACT.md).
 

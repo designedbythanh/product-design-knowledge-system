@@ -9,7 +9,7 @@
 > The index. One row per role that already has a home somewhere: your own design system file, an ADR folder, a design note per feature. Skills go there instead of asking you. A role with no row uses this template's default file.
 >
 > - **Status**: `primary` (the source of truth for that role, one per role) or `supporting`.
-> - **Verified**: the date you last confirmed the path is current. A skill that sees the file changed since then will ask.
+> - **Verified**: the date you last confirmed the path is current. A skill that sees in git that the file changed since then will ask whether it still holds (not for briefs: they change by design).
 >
 > **If missing:** skills only know this file and the default ones, and ask for everything else.
 
